@@ -35,7 +35,7 @@
     self.textField.returnKeyType = UIReturnKeyDone;
     self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.textField.placeholder = NSLocalizedString(@"Website URL", @"Placeholder text for web browser URL field");
+    self.textField.placeholder = NSLocalizedString(@"Website URL or Search", @"Placeholder text for web browser URL field");
     self.textField.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
     self.textField.delegate = self;
     
@@ -64,13 +64,7 @@
     [self.reloadButton addTarget:self.webView action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
     
     
-//    [mainView addSubview:self.webView];
-//    [mainView addSubview:self.textField];
-//    [mainView addSubview:self.backButton];
-//    [mainView addSubview:self.forwardButton];
-//    [mainView addSubview:self.stopButton];
-//    [mainView addSubview:self.reloadButton];
-//    my hard work
+
     
     for (UIView *viewToAdd in @[self.webView, self.textField, self.backButton, self.forwardButton, self.stopButton, self.reloadButton]) {
         [mainView addSubview:viewToAdd];
@@ -123,15 +117,43 @@
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
-    if (!URL.scheme) {
-        // The user didn't type http: or https:
-        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", URLString]];
+    if (!URL.scheme)
+    {
+        NSRange urlSpace = [URLString rangeOfString:@" "];
+        NSString *urlNoSpace = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        
+        if (urlSpace.location != NSNotFound) {
+            URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.google.com/search?q=%@", urlNoSpace]];
+        }
+        else
+        {
+            URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", URLString]];
+        }
     }
     
     if (URL) {
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
         [self.webView loadRequest:request];
     }
+    
+//    NSRange urlSpace = [URLString rangeOfString:@" "];
+//    NSString *urlNoSpace = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//    
+//    if (!URL.scheme) {
+//        // The user didn't type http: or https:
+//      
+//        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", URLString]];
+//    }
+//    
+//    if (URL) {
+//        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+//        [self.webView loadRequest:request];
+//    }
+////    NSRange urlSpace = [URLString rangeOfString:@" "];
+////    NSString *urlNoSpace = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+//    if (urlSpace.location != NSNotFound) {
+//        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http//www.google.com/search?q=%@", urlNoSpace]];
+//    }
     
     return NO;
 }
@@ -146,7 +168,7 @@
     [self updateButtonsAndTitle];
 }
 
--(void)webView:(WKWebView *)webView didfailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+-(void)webView:(WKWebView *)webView didfailProvisionalNavigation:(WKNavigation *) navigation withError:(NSError *)error {
     [self webView:webView didFailNavigation:navigation withError:error];
 }
 -(void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
