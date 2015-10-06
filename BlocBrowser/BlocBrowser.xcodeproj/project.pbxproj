@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D3281BA1BC3573C00CA730A /* AwesomeFloatingToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3281B91BC3573C00CA730A /* AwesomeFloatingToolbar.m */; settings = {ASSET_TAGS = (); }; };
 		4D7A1BAA1BBB619A00489BD5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1BA91BBB619A00489BD5 /* main.m */; };
 		4D7A1BAD1BBB619A00489BD5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1BAC1BBB619A00489BD5 /* AppDelegate.m */; };
 		4D7A1BB01BBB619A00489BD5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1BAF1BBB619A00489BD5 /* ViewController.m */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D3281B81BC3573C00CA730A /* AwesomeFloatingToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwesomeFloatingToolbar.h; sourceTree = "<group>"; };
+		4D3281B91BC3573C00CA730A /* AwesomeFloatingToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwesomeFloatingToolbar.m; sourceTree = "<group>"; };
 		4D7A1BA51BBB619A00489BD5 /* BlocBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlocBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D7A1BA91BBB619A00489BD5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4D7A1BAB1BBB619A00489BD5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				4D7A1BAC1BBB619A00489BD5 /* AppDelegate.m */,
 				4D7A1BAE1BBB619A00489BD5 /* ViewController.h */,
 				4D7A1BAF1BBB619A00489BD5 /* ViewController.m */,
+				4D3281B81BC3573C00CA730A /* AwesomeFloatingToolbar.h */,
+				4D3281B91BC3573C00CA730A /* AwesomeFloatingToolbar.m */,
 				4D7A1BB41BBB619A00489BD5 /* Assets.xcassets */,
 				4D7A1BB61BBB619A00489BD5 /* LaunchScreen.storyboard */,
 				4D7A1BB91BBB619A00489BD5 /* Info.plist */,
@@ -269,6 +274,7 @@
 				4D7A1BB01BBB619A00489BD5 /* ViewController.m in Sources */,
 				4D7A1BAD1BBB619A00489BD5 /* AppDelegate.m in Sources */,
 				4D7A1BAA1BBB619A00489BD5 /* main.m in Sources */,
+				4D3281BA1BC3573C00CA730A /* AwesomeFloatingToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
