@@ -53,6 +53,19 @@
 #pragma mark - UIViewController
 
 -(void)loadView {
+    
+    UIAlertController *welcome = [UIAlertController
+                                  alertControllerWithTitle:@"Welcome" message:@"Enjoy your browsing" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction
+                         actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                         {
+                             [welcome dismissViewControllerAnimated:YES completion:nil];
+                         }];
+    [welcome addAction:ok];
+    
+    [self presentViewController:welcome animated:YES completion:nil];
+    
     UIView *mainView = [UIView new];
     
     self.webView = [[WKWebView alloc] init];
