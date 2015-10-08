@@ -96,6 +96,7 @@
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
     
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -113,7 +114,10 @@
     self.webView.frame =CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
 
     
-    self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
+    
+    if (self.awesomeToolbar.frame.size.width == 0) {
+        self.awesomeToolbar.frame = CGRectMake(20, 100, 280, 60);
+    }
 }
 
 #pragma mark - AwesomeFloatingToolbarDelegate
@@ -140,6 +144,20 @@
         toolbar.frame = potentialNewFrame;
     }
 }
+
+- (void) floatingToolbar:(AwesomeFloatingToolbar *)toolbar didTryToPinchWithScale:(CGFloat)scale {
+    
+    CGPoint startingPoint = toolbar.frame.origin;
+    //CGPoint newPoint = CGPointMake(startingPoint.x + offset.x, startingPoint.y + offset.y);
+    
+    CGRect potentialNewFrame = CGRectMake(startingPoint.x, startingPoint.y, CGRectGetWidth(toolbar.frame) * scale, CGRectGetHeight(toolbar.frame) * scale);
+    
+    if (CGRectContainsRect(self.view.bounds, potentialNewFrame) && potentialNewFrame.size.width > 100) {
+        toolbar.frame = potentialNewFrame;
+    }
+}
+
+
 
 
 #pragma mark - UITextFieldDelegate
@@ -170,25 +188,7 @@
         [self.webView loadRequest:request];
     }
     
-//    NSRange urlSpace = [URLString rangeOfString:@" "];
-//    NSString *urlNoSpace = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-//    
-//    if (!URL.scheme) {
-//        // The user didn't type http: or https:
-//      
-//        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", URLString]];
-//    }
-//    
-//    if (URL) {
-//        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-//        [self.webView loadRequest:request];
-//    }
-////    NSRange urlSpace = [URLString rangeOfString:@" "];
-////    NSString *urlNoSpace = [URLString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-//    if (urlSpace.location != NSNotFound) {
-//        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http//www.google.com/search?q=%@", urlNoSpace]];
-//    }
-    
+
     return NO;
 }
 
@@ -250,5 +250,7 @@
     [self.awesomeToolbar setEnabled:[self.webView isLoading] forButtonWithTitle:kWebBrowserStopString];
     [self.awesomeToolbar setEnabled:![self.webView isLoading] && self.webView.URL forButtonWithTitle:kWebBrowserRefreshString];
 }
+
+
 
 @end
